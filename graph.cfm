@@ -40,24 +40,16 @@
        Remove this if you use the .htaccess -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>MATH2056 Graph Generator - Make a Graph</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <title>GraphViz Examples and Tutorial - Make a Graph</title>
+  <meta name="description" content="An interface as well as documentation to the GraphViz program and DSL">
+  <meta name="author" content="Joshua Hayes-Sheen (grevian+graphviz@gmail.com)">
 
   <!--  Mobile viewport optimized: j.mp/bplateviewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-
   <!-- CSS : implied media="all" -->
-  <link rel="stylesheet" href="css/style.css?v=2">
+  <link rel="stylesheet" href="css/style.css">
 
-  <!-- Uncomment if you are specifically targeting less enabled mobile browsers
-  <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
- 
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
   <script src="js/libs/modernizr-1.6.min.js"></script>
 
@@ -67,7 +59,7 @@
 
   <div id="container">
     <header>
-		<h1>Unofficial MATH2056 Graph Generator</h1>
+		<h1>GraphViz for discrete math students</h1>
 		<nav>
 		 <ul>
 		 <li><a href="index.html">Home</a></li>
@@ -100,7 +92,7 @@
 	  <label for="height">Max Height:</label><input type="text" id="height" name="y" value="#url.y#" size="3" />
 	  <label for="width">Max Width:</label><input type="text" id="width" name="x" value="#url.x#" size="3" />
 	 </cfoutput>
-	 (In Inches of all things)
+	 (In Inches of all things, Chalk it up to the age of the original program)
 	 <br />
 	 <input type="submit" value="Generate" />
 	</form>
@@ -108,7 +100,7 @@
 	<div id="results">	
 	<cfoutput>
 	 <cfif url.result neq "" and not len(error) >	
-	  <img src="/tmp/#GetFileFromPath(file)#.png" />
+	  <img src="tmp/#GetFileFromPath(file)#.png" />
      <cfelseif len(error)>
       <p class="error">
 	   <h3>Error:</h3>
@@ -117,9 +109,6 @@
      </cfif>
 	</cfoutput>
     </div>
-    <footer>
-	
-    </footer>
   </div> <!--! end of #container -->
 
 
@@ -144,7 +133,7 @@
   <!-- asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet 
        change the UA-XXXXX-X to be your site's ID -->
   <script>
-   var _gaq = [['_setAccount', 'UA-10594743-3'], ['_trackPageview']];
+   var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
    (function(d, t) {
     var g = d.createElement(t),
         s = d.getElementsByTagName(t)[0];
