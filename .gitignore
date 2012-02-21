@@ -1,3 +1,5 @@
 tmp/*
 */.svn
+.svn
+*.swp
 
