@@ -10,10 +10,11 @@ HTML-5 Boilerplate template
 
 ## Setup
 
-I hosted this on an OpenBlueDragon on Tomcat platform, setting up your JSP and
-CFML platforms is your own business though it's pretty easy to do these days,
-Once that's done just place this project in your CFML webapps/ directory, or
-serve the app from wherever you like using your JSP server and mod_redirect as
+I hosted this on an [OpenBlueDragon](http://openbluedragon.org/) on a
+[Tomcat](http://tomcat.apache.org/) platform, setting up your JSP and CFML
+platforms is your own business though it's pretty easy to do these days, Once
+that's done just place this project in your CFML webapps/ directory, or serve
+the app from wherever you like using your JSP server and mod_redirect as
 needed. 
 
 ## Caveats
