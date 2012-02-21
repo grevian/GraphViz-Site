@@ -1,0 +1,321 @@
+<!doctype html>  
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ --> 
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>MATH2056 Graph Generator - Examples</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--  Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+  <!-- CSS : implied media="all" -->
+  <link rel="stylesheet" href="css/style.css?v=2">
+
+  <!-- Uncomment if you are specifically targeting less enabled mobile browsers
+  <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
+ 
+  <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
+  <script src="js/libs/modernizr-1.6.min.js"></script>
+
+</head>
+
+<body>
+
+  <div id="container">
+    <header>
+		<h1>Unofficial MATH2056 Graph Generator</h1>
+		<nav>
+		 <ul>
+		 <li><a href="index.html">Home</a></li>
+		 <li><a href="documentation.html" class="current">Documentation</a></li>
+		 <li><a href="graph.cfm">Make a Graph</a></li>
+		 <li><a href="about.html">About this Site</a></li>
+		 <li><a href="links.html">Related Links</a></li>
+		 <li><a href="contact.html">Contact Me</a></li>
+		 </ul>
+		</nav>
+    <nav style="margin-left: 4em;">
+        <ul style="border: 0px;">
+         <li><a href="example.html" class="current">Examples</a></li>
+         <li><a href="reference.html">Reference</a></li>
+       </ul>
+     </nav>
+    </header>
+    
+    <div id="main">
+    <h2>Examples</h2>
+	<p>GraphViz uses the <code class="inline">DOT</code> language to describe graphs, Below are examples
+	of the language, with their resulting outputs.</p>
+	<br />
+	<h4>Index</h4>
+	<ul>
+	 <li><a href="#example-1">Simple Graph</a></li>
+	 <li><a href="#example-2">K6</a></li>
+	 <li><a href="#example-3">Simple Digraph</a></li>
+	 <li><a href="#example-4">Full Digraph</a></li>
+	 <li><a href="#example-5">Showing A Path</a></li>
+	 <li><a href="#example-6">Subgraphs</a></li>
+	 <li><a href="#example-7">Large Graphs</a></li>
+	</ul>
+	<p>
+	<a name="example-1" />
+	<h3>Example 1: Simple Graph</h3>
+	<div class="dot-example-container">
+	<code>	graph { 
+		a -- b; 
+		b -- c; 
+		a -- c; 
+		d -- c; 
+		e -- c; 
+		e -- a; 
+	} 
+	</code>
+	<img src="images/example1.png" class="dot-example"/>
+	</div>
+	</p>
+	<p>
+	<a name="example-2" />
+	<h3>Example 2: K6</h3>
+	<div class="dot-example-container">
+	<code>	graph {
+		a -- b;
+		b -- c;
+		c -- d;
+		d -- e;
+		e -- f;
+		a -- f;
+		a -- c;
+		a -- d;
+		a -- e;
+		b -- d;
+		b -- e;
+		b -- f;
+		c -- e;
+		c -- f;
+		d -- f;
+	}
+	</code>
+	<img src="images/example2.png" class="dot-example"/>
+	</div>
+	</p>
+	<p>
+	<a name="example-3" />
+	<h3>Example 3: Simple Digraph</h3>
+	<div class="dot-example-container">
+	<code>	digraph {
+		a -> b;
+		b -> c;
+		c -> d;
+		d -> a;
+	}
+	</code>
+	<img src="images/example3.png" class="dot-example"/>
+	</div>
+	</p>
+	
+	<p>
+	<a name="example-4" />
+	<h3>Example 4: Full Digraph</h3>
+	<div class="dot-example-container">
+	<code>	digraph {
+		a -> b[label="0.2",weight="0.2"];
+		a -> c[label="0.4",weight="0.4"];
+		c -> b[label="0.6",weight="0.6"];
+		c -> e[label="0.6",weight="0.6"];
+		e -> e[label="0.1",weight="0.1"];
+		e -> b[label="0.7",weight="0.7"];
+	}
+	</code>
+	<img src="images/example4.png" class="dot-example"/>
+	</div>
+	</p>
+	
+	<p>
+	<a name="example-5" />
+	<h3>Example 5: Showing A Path</h3>
+	<div class="dot-example-container">
+	<code>	graph {
+		a -- b[color=red,penwidth=3.0];
+		b -- c;
+		c -- d[color=red,penwidth=3.0];
+		d -- e;
+		e -- f;
+		a -- d;
+		b -- d[color=red,penwidth=3.0];
+		c -- f[color=red,penwidth=3.0];
+	}
+	</code>
+	Note that there's also a shorthand method as follows: 
+	<code>	graph { 
+		a -- b -- d -- c -- f[color=red,penwidth=3.0];
+		b -- c; 
+		d -- e; 
+		e -- f; 
+		a -- d; 
+	}	
+	</code>
+	<img src="images/example5.png" class="dot-example"/>
+	</div>
+	</p>
+	
+	<p>
+	<a name="example-6" />
+	<h3>Example 6: Subgraphs</h3>
+	<div class="dot-example-container">
+	Please note there are some quirks here, First the name of the subgraphs are important, to be visually seperated they must
+	be prefixed with <code class="inline">cluster_</code> as shown below, and second only the DOT and FDP layout methods seem 
+	to support subgraphs (See the graph generation page for more information on the layout methods)
+	<code>	digraph { 
+		subgraph cluster_0 {
+			label="Subgraph A";
+			a -> b;
+			b -> c;
+			c -> d;
+		}
+		
+		subgraph cluster_1 {
+			label="Subgraph B";
+			a -> f;
+			f -> c;
+		}
+	}
+	</code>
+	<img src="images/example6.png" class="dot-example"/><br />
+	Another Example of a Subgraph, In this example I group nodes together seperately from their edges, And also
+	uses the graph attribute <code class="inline">splines=line;</code> to specify that edges should be drawn only as 
+	straight lines, no curves allowed.
+	<code>	graph { 
+		splines=line; 
+		subgraph cluster_0 { 
+			label="Subgraph A"; 
+			a; b; c
+		} 
+ 
+		subgraph cluster_1 { 
+			label="Subgraph B"; 
+			d; e;
+		}
+
+		a -- e; 
+		a -- d; 
+		b -- d; 
+		b -- e; 
+		c -- d; 
+		c -- e; 
+	}	
+	</code>
+	<img src="images/example6a.png" class="dot-example"/>
+	</div>
+	</p>
+	
+	<p>
+	<a name="example-7" />
+	<h3>Example 7: Large Graphs</h3>
+	To make it easier to input large graph descriptions, One may group edges together with a set of braces, It may
+	also help to lay the graph out left to right instead of top to bottom.
+	<div class="dot-example-container">
+	<code>	graph {
+		rankdir=LR; // Left to Right, instead of Top to Bottom
+		a -- { b c d };
+		b -- { c e };
+		c -- { e f };
+		d -- { f g };
+		e -- h;
+		f -- { h i j g };
+		g -- k;
+		h -- { o l };
+		i -- { l m j };
+		j -- { m n k };
+		k -- { n r };
+		l -- { o m };
+		m -- { o p n };
+		n -- { q r };
+		o -- { s p };
+		p -- { s t q };
+		q -- { t r };
+		r -- t;
+		s -- z; 
+		t -- z;
+	}
+	</code>
+	<img src="images/example7.png" class="dot-example"/><br />
+	Another feature that can make large graphs manageable is to group nodes together at the same rank,
+	the graph above for example is copied from Assignment #2, Question #6, but doesn't look the same because of how the
+	nodes are shifted around to fit in a more space optimal, but less logically simple way.
+	We can make it look much more similar by grouping the nodes together for display as is done in the assignment
+	with rank, as follows	
+	<code>	graph { 
+		rankdir=LR;
+		a -- { b c d }; b -- { c e }; c -- { e f }; d -- { f g }; e -- h; 
+		f -- { h i j g }; g -- k; h -- { o l }; i -- { l m j }; j -- { m n k }; 
+		k -- { n r }; l -- { o m }; m -- { o p n }; n -- { q r }; 
+		o -- { s p }; p -- { s t q }; q -- { t r }; r -- t; s -- z; t -- z; 
+		{ rank=same, b, c, d }
+		{ rank=same, e, f, g }
+		{ rank=same, h, i, j, k }
+		{ rank=same, l, m, n }
+		{ rank=same, o, p, q, r }
+		{ rank=same, s, t }
+	}
+	</code>
+	<img src="images/example7a.png" class="dot-example"/>
+	</div>
+	</p>
+	
+    </div>
+	    
+    <footer>
+	
+    </footer>
+  </div> <!--! end of #container -->
+
+
+  <!-- Javascript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.4.2.js"%3E%3C/script%3E'))</script>
+  
+  
+  <!-- scripts concatenated and minified via ant build script-->
+  <script src="js/plugins.js"></script>
+  <script src="js/script.js"></script>
+  <!-- end concatenated and minified scripts-->
+  
+  
+  <!--[if lt IE 7 ]>
+    <script src="js/libs/dd_belatedpng.js"></script>
+    <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
+  <![endif]-->
+
+  <!-- asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet 
+       change the UA-XXXXX-X to be your site's ID -->
+  <script>
+   var _gaq = [['_setAccount', 'UA-10594743-3'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>

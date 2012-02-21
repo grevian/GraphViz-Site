@@ -1,0 +1,196 @@
+<!doctype html>  
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ --> 
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>MATH2056 Graph Generator - Reference</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--  Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+  <!-- CSS : implied media="all" -->
+  <link rel="stylesheet" href="css/style.css?v=2">
+
+  <!-- Uncomment if you are specifically targeting less enabled mobile browsers
+  <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
+ 
+  <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
+  <script src="js/libs/modernizr-1.6.min.js"></script>
+
+</head>
+
+<body>
+
+  <div id="container">
+    <header>
+		<h1>Unofficial MATH2056 Graph Generator</h1>
+		<nav>
+		 <ul>
+		 <li><a href="index.html">Home</a></li>
+		 <li><a href="documentation.html" class="current">Documentation</a></li>
+		 <li><a href="graph.cfm">Make a Graph</a></li>
+		 <li><a href="about.html">About this Site</a></li>
+		 <li><a href="links.html">Related Links</a></li>
+		 <li><a href="contact.html">Contact Me</a></li>
+		 </ul>
+		</nav>
+    <nav style="margin-left: 4em;">
+     <ul style="border: 0px;">
+       <li><a href="example.html">Examples</a></li>
+       <li><a href="reference.html" class="current">Reference</a></li>
+     </ul>
+    </nav>
+    </header>
+    
+    <div id="main">
+    <h2>Reference</h2>
+    <h3>General Information, and Links to more detailed References</h3>
+    <p>
+     Graphs and Vertices (Called Nodes in the GraphViz notation) may have a large number of attributes
+     that affect both the graph's actual layout, and details like colours, labels, line types, etc.
+     I cover a few of the attributes below but for a full reference see <a href="http://graphviz.org/doc/info/attrs.html">The
+     GraphViz Attribute Index</a>, It's a bit tricky to read at first but really not too complicated, and it's very comprehensive.
+    </p>
+    <p><h3>Important Attributes</h3>
+     The following attributes are of particular importance to our class
+     <h4>Graph Attributes</h4>
+     <ul>
+      <li><code class="inline">label="My Graph";</code>Label a graph itself</li>
+      <li><code class="inline">rankdir=LR;</code>Lay the graph out from Left to Right, instead of Top to Bottom</li>
+      <li><code class="inline">{rank=same; a, b, c }</code>Group nodes together at the same level of a graph</li>
+      <li><code class="inline">splines="line";</code>Force edges to be straight, no curves or angles</li>
+      <li><code class="inline">K=0.6;</code>Used to influence the 'spring' used in the layout, Can be used to push nodes further apart, 
+      which is especially useful for twopi and sfdp layouts</li>
+     </ul>
+     <h4>Vertex Attributes</h4>
+     <ul>
+      <li><code class="inline">[label="Some Label"]</code>Labels the Vertex</li>
+      <li><code class="inline">[color="red"]</code>Colors the Vertex</li>
+      <li><code class="inline">[fillcolor="blue"]</code>Fills the Vertex with the specified colour</li>
+     </ul>
+     <h4>Edge Attributes</h4>
+     <ul>
+      <li><code class="inline">[label="Some Label"]</code>Labels the Edge (Useful for Weights)</li>
+      <li><code class="inline">[color="red"]</code>Colors the Vertex (Useful for Paths)</li>
+      <li><code class="inline">[penwidth=2.0]</code>Adjusts the thickness of the edge line, Very useful for Paths</li>
+     </ul>
+     <br />
+     Edges may also have a <code class="inline">weight</code> attribute, defined as <code class="inline">[weight=0.5]</code> for example,
+     but note that this doesn't display the weight directly, It instead acts as a hint to the graph layout to give this edge a more
+     direct routing.
+    </p>
+    
+    <p><h3>Graphs</h3>
+    Graphs are defined as either a <code class="inline">graph</code> or a <code class="inline">digraph</code> using
+    fairly standard syntax, similar to an edge list.<br /><br />
+    <code>	graph { 
+		node1 -- node2;
+		node3 -- node2;    
+	}
+    </code><br />
+<code>	digraph { 
+		node1 -> node2;
+		node3 -> node2;    
+	}
+    </code><br />
+    </p>
+    <p><h3>Vertices</h3>
+    Vertices are defined with a simple plaintext label, <code class="inline">A, B, C, Test, Vertice1, some_vertex</code>, etc. 
+    If you need a more complicated label you can declare the vertex first, before defining an edge, and give it a label attribute,
+    for example: <br />
+    <code>	digraph { 
+		someVertex[label="A Complicated Label"];
+		someVertex -> node2;
+		node2 -> node3;
+	}     
+    </code><br />
+    </p>
+    <p><h3>Edges</h3>
+    For the most part the only concern with edges is their colour/thickness, and Label, as the rest is handled
+    automatically by the graph/digraph definition, To color an edge apply the <a href="http://graphviz.org/doc/info/colors.html">color attribute</a> to the graph
+    definition as follows<br />
+    <code>	digraph { 
+		node1 -> node2[color="red"];
+	}
+    </code><br/>
+    To Display a weight, we give the vertex itself a label, similar to how we label nodes
+    <br />
+<code>	digraph { 
+		node1 -> node2[label="0.2"];
+		node2 -> node3[label="0.2"];
+	}
+</code>
+    <br />
+    We can actually apply any label we like to edge in this way
+    <code>	digraph {
+		node1 -> node2[label="edge1"];
+		node2 -> node3[label="edge2"];    
+	}
+    </code>
+    <br />
+    You may combine these attributes in any way you please<br />
+    <code>	digraph {
+		node1[label="Some Complicated Label"];
+		node1 -> node2[label="An Edge",color=red];
+		node2 -> node3;
+	}
+    </code>
+    </p>
+    </div>
+	    
+    <footer>
+	
+    </footer>
+  </div> <!--! end of #container -->
+
+
+  <!-- Javascript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.4.2.js"%3E%3C/script%3E'))</script>
+  
+  
+  <!-- scripts concatenated and minified via ant build script-->
+  <script src="js/plugins.js"></script>
+  <script src="js/script.js"></script>
+  <!-- end concatenated and minified scripts-->
+  
+  
+  <!--[if lt IE 7 ]>
+    <script src="js/libs/dd_belatedpng.js"></script>
+    <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
+  <![endif]-->
+
+  <!-- asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet 
+       change the UA-XXXXX-X to be your site's ID   --> 
+  <script>
+   var _gaq = [['_setAccount', 'UA-10594743-3'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+</body>
+</html>
