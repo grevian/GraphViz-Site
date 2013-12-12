@@ -37,12 +37,14 @@
 {% if building %}
   {% block javascript %}
            <script>
+           var pollPath = '/poll/{{ graph_id }}';
+
            function pollComplete(data) {
             console.log(data);
             // If still building, wait 5 seconds then try again
             if (data.building == true) {
               console.log("Still Building, Polling Again");
-              $.get(pollPath, function(data) { setTimeout(pollComplete(data), 5000); });
+              $.get(pollPath, function(data) { setTimeout(pollComplete(data), 3000); });
             }
             // If completed, Display the imaage
             if (data.building == false) {
@@ -63,7 +65,7 @@
            }
 
            $('#graph-image').hide();
-           $.get('/poll/{{ graph_id }}', function( data ){
+           $.get(pollPath, function( data ){
             pollComplete(data);
            }, "json");
            </script>
