@@ -36,6 +36,8 @@ class StaticPageHandler(webapp2.RequestHandler):
     template_values = {}
     template_values['main_nav'] = get_navigation_links(name)
     template = jinja_environment.get_template('%s.html' % name)
+    self.response.cache_control = 'public'
+    self.response.cache_control.max_age = 86400
     self.response.out.write(template.render(template_values))
 
 APP = webapp2.WSGIApplication([

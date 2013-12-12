@@ -69,6 +69,8 @@ class GraphImageUploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 class ServeGraphHandler(blobstore_handlers.BlobstoreDownloadHandler):
   def get(self, graph_id):
     g = UserGraph.get_by_id(int(graph_id))
+    self.response.cache_control = 'public'
+    self.response.cache_control.max_age = 32000000
     self.send_blob(g.image)
 
 class GraphBuildingPoll(webapp2.RequestHandler):
