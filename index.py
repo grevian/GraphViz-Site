@@ -3,6 +3,8 @@ import os
 import webapp2
 import jinja2
 
+from graph import GraphPublishHandler, GraphImageUploadHandler, ServeGraphHandler, GraphBuildingPoll
+
 jinja_environment = jinja2.Environment(
   loader=jinja2.FileSystemLoader(os.path.dirname('resources/templates/')))
 
@@ -36,13 +38,6 @@ class StaticPageHandler(webapp2.RequestHandler):
     template = jinja_environment.get_template('%s.html' % name)
     self.response.out.write(template.render(template_values))
 
-class GraphPageHandler(webapp2.RequestHandler):
-  def get(self, graph_id=None):
-    pass
-
-  def post(self):
-    pass
-
 APP = webapp2.WSGIApplication([
     webapp2.Route(r'/', StaticPageHandler, name='index', defaults={'name': 'index'}),
     webapp2.Route(r'/about', StaticPageHandler, name='about', defaults={'name': 'about'}),
@@ -51,6 +46,10 @@ APP = webapp2.WSGIApplication([
     webapp2.Route(r'/documentation', StaticPageHandler, name='documentation', defaults={'name': 'documentation'}),
     webapp2.Route(r'/example', StaticPageHandler, name='example', defaults={'name': 'example'}),
     webapp2.Route(r'/reference', StaticPageHandler, name='reference', defaults={'name': 'reference'}),
-    webapp2.Route(r'/graph', GraphPageHandler, name='graph'),
+    webapp2.Route(r'/graph', GraphPublishHandler, name='graph'),
+    webapp2.Route(r'/graph/<graph_id:\d+>', GraphPublishHandler, name='graph_view'),
+    webapp2.Route(r'/complete_upload/<graph_id:\d+>', GraphImageUploadHandler, name='graph_upload'),
+    webapp2.Route(r'/graph/images/<graph_id:\d+>', ServeGraphHandler, name='graph_download'),
+    webapp2.Route(r'/poll/<graph_id:\d+>', GraphBuildingPoll, name='graph_poll'),
 ], debug=True)
 
