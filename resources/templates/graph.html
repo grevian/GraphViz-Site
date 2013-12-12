@@ -25,12 +25,12 @@
         {% else %}
           <img id="graph-image" src="/graph/images/{{ graph_id }}" />
         {% endif %}
-        {% if error %}
-        <p class="error">
+        <p class="error" id="error-container">
            <h3>Error:</h3>
+           <span id="error-message">
             {{ error|e }}
+           </span>
         </p>
-        {% endif %}
         {% endif %}
    {% endblock %}
 
@@ -60,11 +60,13 @@
            }
 
            function doFail(data) {
-            // Just reload the page to display the error
-            location.reload();
+            $('#error-container').show();
+            $('#error-message').text(data.error);
            }
 
            $('#graph-image').hide();
+           $('#error-container').hide();
+
            $.get(pollPath, function( data ){
             pollComplete(data);
            }, "json");
