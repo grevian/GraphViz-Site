@@ -1,0 +1,30 @@
+application: grevian-graphviz
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+builtins:
+- deferred: on
+
+handlers:
+- url: /favicon\.ico
+  static_files: resources/static/favicon.ico
+  upload: resources/static/favicon\.ico
+
+- url: /robots.txt
+  static_files: resources/static/robots.txt
+  upload: resources/static/robots.txt
+
+- url: /resources/static
+  static_dir: resources/static
+
+- url: /.*
+  script: index.APP
+
+libraries:
+- name: webapp2
+  version: "2.5.2"
+- name: jinja2
+  version: "2.6"
+
