@@ -17,6 +17,7 @@ jinja_environment = jinja2.Environment(
 class UserGraph(ndb.Model):
   dot = ndb.TextProperty(indexed=False,required=True)
   image = ndb.BlobKeyProperty(indexed=False, required=False)
+  graph_type = ndb.StringProperty(indexed=False, required=True, choices=['dot', 'neato', 'twopi', 'circo', 'fdp'])
   created = ndb.DateTimeProperty(auto_now_add=True)
   building = ndb.BooleanProperty(indexed=True, required=True)
   error = ndb.TextProperty(indexed=False, required=False)
@@ -28,7 +29,7 @@ def build_graph(graph_id):
 
   url = 'https://chart.googleapis.com/chart'
   data = {
-    'cht': 'gv:dot',
+    'cht': 'gv:%s' % g.graph_type,
     'chl': g.dot,
     'chof': 'png'
   }
@@ -101,6 +102,7 @@ class GraphPublishHandler(webapp2.RequestHandler):
 
       template_values['graph_id'] = graph_id
       template_values['dot'] = g.dot
+      template_values['method'] = g.graph_type
       # Tells JS whether to keep polling/refreshing or not
       template_values['building'] = g.building
 
@@ -112,7 +114,8 @@ class GraphPublishHandler(webapp2.RequestHandler):
 
   def post(self):
     dot = self.request.get('dot').strip()
-    g = UserGraph(building=True, dot=dot)
+    graph_type = self.request.get('method').strip()
+    g = UserGraph(building=True, dot=dot, graph_type=graph_type)
     g.put()
 
     deferred.defer(build_graph, g.key.id())
