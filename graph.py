@@ -84,7 +84,6 @@ class GraphBuildingPoll(webapp2.RequestHandler):
     results['building'] = g.building
     if g.error:
       results['error'] = g.error
-      self.response.status_int = 204 # "No Response Available"
     else:
       results['error'] = ''
       self.response.status_int = 202 # "Response Accepted"
