@@ -59,6 +59,7 @@
   <script src="/resources/static/js/plugins.js"></script>
   <script src="/resources/static/js/script.js"></script>
   <!-- end concatenated and minified scripts-->
+  {% block javascript %}{% endblock %}
   
   
   <!--[if lt IE 7 ]>
@@ -68,10 +69,19 @@
 
   <!-- asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet 
        change the UA-XXXXX-X to be your site's ID -->
-  <script>
-   var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-10594743-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
   </script>
-  <script src="/resources/static/js/ga.js"></script>
   
 </body>
 </html>

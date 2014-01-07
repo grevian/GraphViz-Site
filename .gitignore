@@ -2,4 +2,4 @@ tmp/*
 */.svn
 .svn
 *.swp
-
+*.pyc
