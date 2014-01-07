@@ -407,6 +407,11 @@ h4 {
 	float: right;
 	border: 0px;
 }
+
+body {
+  max-width: 1280px;
+  margin: auto auto;
+}
 	
 code {
 	white-space: pre;
