@@ -26,7 +26,7 @@
           <img id="graph-image" src="/graph/images/{{ graph_id }}" />
         {% endif %}
         <p class="error" id="error-container">
-           <h3>Error:</h3>
+           <em>Error:</em>
            <span id="error-message">
             {{ error|e }}
            </span>
@@ -37,39 +37,42 @@
 {% if building %}
   {% block javascript %}
            <script>
-           var pollPath = '/poll/{{ graph_id }}';
+           var graph_id = '{{ graph_id }}';
+           if (graph_id != '') { 
+            pollImage(graph_id);
+           }
 
-           function pollComplete(data) {
+           function pollComplete(data, graph_id) {
             console.log(data);
-            // If still building, wait 5 seconds then try again
+            // If still building, wait 3 seconds then try again
             if (data.building == true) {
               console.log("Still Building, Polling Again");
-              $.get(pollPath, function(data) { setTimeout(pollComplete(data), 3000); });
+              var pollPath = '/poll/' + graph_id;
+              $.get(pollPath, function(data) { setTimeout(pollComplete(data, graph_id), 3000); }, "json");
             }
             // If completed, Display the imaage
-            if (data.building == false) {
+            else if (data.building == false) {
               console.log("Build Complete, Loading Image");
-              $('#graph-image').attr('src', '/graph/images/{{ graph_id }}');
+              $('#graph-image').attr('src', '/graph/images/' + graph_id);
               $('#graph-image').show();
             }
             // If Errored, explode.
-            if (data.error != "") {
+            else if (data.error != "") {
               console.log("Error Encountered while building image");
-              doFail(data);
+              $('#error-container').show();
+              $('#error-message').text(data.error);
             }
            }
 
-           function doFail(data) {
-            $('#error-container').show();
-            $('#error-message').text(data.error);
+            function pollImage(graph_id) {
+              $('#graph-image').hide();
+              $('#error-container').hide();
+              
+              var pollPath = '/poll/' + graph_id;
+              $.get(pollPath, function( data ){
+                pollComplete(data, graph_id);
+              }, "json");
            }
-
-           $('#graph-image').hide();
-           $('#error-container').hide();
-
-           $.get(pollPath, function( data ){
-            pollComplete(data);
-           }, "json");
            </script>
   {% endblock %}
 {% endif %}
