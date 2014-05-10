@@ -1,0 +1,6 @@
+# Keep tasks from retrying forever
+queue:
+- name: default
+  rate: 5/s
+  retry_parameters:
+    task_retry_limit: 3
