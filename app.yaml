@@ -16,6 +16,10 @@ handlers:
   static_files: resources/static/robots.txt
   upload: resources/static/robots.txt
 
+- url: /favicon.ico
+  static_files: resources/static/images/favicon.ico
+  upload: resources/static/images/favicon.ico
+
 - url: /resources/static
   static_dir: resources/static
 
