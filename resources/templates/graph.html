@@ -2,7 +2,7 @@
    {% block content %}
     <h2>Make A Graph</h2>
         <p>Enter your <code class="inline">DOT</code> definition in the box below, and click Generate to display the resulting graph.</p>
-        <form method="POST" action="/graph" id="dot-submission">
+        <form method="POST" action="/graph" id="dot-submission" onsubmit="ga('send', 'event', 'Graph', 'create');return true;">
          <textarea spellcheck="false" wrap="off" id="dot" name="dot">{{ dot|e }}</textarea>
          <br />
          <label for="method">Layout Method</label>
