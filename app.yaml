@@ -20,6 +20,10 @@ handlers:
   static_files: resources/static/favicon.ico
   upload: resources/static/favicon.ico
 
+- url: /resources/static/images
+  static_dir: resources/static/images
+  expiration: "30d"
+
 - url: /resources/static
   static_dir: resources/static
 
