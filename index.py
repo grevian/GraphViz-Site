@@ -42,12 +42,15 @@ class StaticPageHandler(webapp2.RequestHandler):
 
 APP = webapp2.WSGIApplication([
     webapp2.Route(r'/', StaticPageHandler, name='index', defaults={'name': 'index'}),
+    webapp2.Route(r'/index.html', StaticPageHandler, name='index_html', defaults={'name': 'index'}),
     webapp2.Route(r'/about', StaticPageHandler, name='about', defaults={'name': 'about'}),
     webapp2.Route(r'/contact', StaticPageHandler, name='contact', defaults={'name': 'contact'}),
     webapp2.Route(r'/links', StaticPageHandler, name='links', defaults={'name': 'links'}),
     webapp2.Route(r'/documentation', StaticPageHandler, name='documentation', defaults={'name': 'documentation'}),
     webapp2.Route(r'/example', StaticPageHandler, name='example', defaults={'name': 'example'}),
+    webapp2.Route(r'/example.html', StaticPageHandler, name='example_html', defaults={'name': 'example'}),
     webapp2.Route(r'/reference', StaticPageHandler, name='reference', defaults={'name': 'reference'}),
+    webapp2.Route(r'/reference.html', StaticPageHandler, name='reference_html', defaults={'name': 'reference'}),
     webapp2.Route(r'/graph', GraphPublishHandler, name='graph'),
     webapp2.Route(r'/graph/<graph_id:\d+>', GraphPublishHandler, name='graph_view'),
     webapp2.Route(r'/complete_upload/<graph_id:\d+>', GraphImageUploadHandler, name='graph_upload'),
