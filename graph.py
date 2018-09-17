@@ -27,7 +27,7 @@ def build_graph(graph_id):
   FINISH_URL = '/complete_upload/%s' % graph_id
   blobstore_url = blobstore.create_upload_url(FINISH_URL)
 
-  url = 'https://chart.googleapis.com/chart'
+  url = 'https://image-charts.com/chart'
   data = {
     'cht': 'gv:%s' % g.graph_type,
     'chl': g.dot,
