@@ -1,221 +1,305 @@
-   {% extends "base.html" %}
-   {% block content %}
-   <h2>Examples</h2>
-	<p>GraphViz uses the <code class="inline">DOT</code> language to describe graphs, Below are examples
-	of the language, with their resulting outputs.</p>
-	<br />
-	<h4>Index</h4>
-	<ul>
-	 <li><a href="#example-1">Simple Graph</a></li>
-	 <li><a href="#example-2">K6</a></li>
-	 <li><a href="#example-3">Simple Digraph</a></li>
-	 <li><a href="#example-4">Full Digraph</a></li>
-	 <li><a href="#example-5">Showing A Path</a></li>
-	 <li><a href="#example-6">Subgraphs</a></li>
-	 <li><a href="#example-7">Large Graphs</a></li>
-	</ul>
-	<p>
-	<a name="example-1" />
-	<h3>Example 1: Simple Graph</h3>
-	<div class="dot-example-container">
-	<code>	graph { 
-		a -- b; 
-		b -- c; 
-		a -- c; 
-		d -- c; 
-		e -- c; 
-		e -- a; 
-	} 
-	</code>
-	<img src="/resources/static/images/example1.png" class="dot-example"/>
-	</div>
-	</p>
-	<p>
-	<a name="example-2" />
-	<h3>Example 2: K6</h3>
-	<div class="dot-example-container">
-	<code>	graph {
-		a -- b;
-		b -- c;
-		c -- d;
-		d -- e;
-		e -- f;
-		a -- f;
-		a -- c;
-		a -- d;
-		a -- e;
-		b -- d;
-		b -- e;
-		b -- f;
-		c -- e;
-		c -- f;
-		d -- f;
-	}
-	</code>
-	<img src="/resources/static/images/example2.png" class="dot-example"/>
-	</div>
-	</p>
-	<p>
-	<a name="example-3" />
-	<h3>Example 3: Simple Digraph</h3>
-	<div class="dot-example-container">
-	<code>	digraph {
-		a -> b;
-		b -> c;
-		c -> d;
-		d -> a;
-	}
-	</code>
-	<img src="/resources/static/images/example3.png" class="dot-example"/>
-	</div>
-	</p>
-	
-	<p>
-	<a name="example-4" />
-	<h3>Example 4: Full Digraph</h3>
-	<div class="dot-example-container">
-	<code>	digraph {
-		a -> b[label="0.2",weight="0.2"];
-		a -> c[label="0.4",weight="0.4"];
-		c -> b[label="0.6",weight="0.6"];
-		c -> e[label="0.6",weight="0.6"];
-		e -> e[label="0.1",weight="0.1"];
-		e -> b[label="0.7",weight="0.7"];
-	}
-	</code>
-	<img src="/resources/static/images/example4.png" class="dot-example"/>
-	</div>
-	</p>
-	
-	<p>
-	<a name="example-5" />
-	<h3>Example 5: Showing A Path</h3>
-	<div class="dot-example-container">
-	<code>	graph {
-		a -- b[color=red,penwidth=3.0];
-		b -- c;
-		c -- d[color=red,penwidth=3.0];
-		d -- e;
-		e -- f;
-		a -- d;
-		b -- d[color=red,penwidth=3.0];
-		c -- f[color=red,penwidth=3.0];
-	}
-	</code>
-	Note that there's also a shorthand method as follows: 
-	<code>	graph { 
-		a -- b -- d -- c -- f[color=red,penwidth=3.0];
-		b -- c; 
-		d -- e; 
-		e -- f; 
-		a -- d; 
-	}	
-	</code>
-	<img src="/resources/static/images/example5.png" class="dot-example"/>
-	</div>
-	</p>
-	
-	<p>
-	<a name="example-6" />
-	<h3>Example 6: Subgraphs</h3>
-	<div class="dot-example-container">
-	Please note there are some quirks here, First the name of the subgraphs are important, to be visually seperated they must
-	be prefixed with <code class="inline">cluster_</code> as shown below, and second only the DOT and FDP layout methods seem 
-	to support subgraphs (See the graph generation page for more information on the layout methods)
-	<code>	digraph { 
-		subgraph cluster_0 {
-			label="Subgraph A";
-			a -> b;
-			b -> c;
-			c -> d;
-		}
-		
-		subgraph cluster_1 {
-			label="Subgraph B";
-			a -> f;
-			f -> c;
-		}
-	}
-	</code>
-	<img src="/resources/static/images/example6.png" class="dot-example"/><br />
-	Another Example of a Subgraph, In this example I group nodes together seperately from their edges, And also
-	uses the graph attribute <code class="inline">splines=line;</code> to specify that edges should be drawn only as 
-	straight lines, no curves allowed.
-	<code>	graph { 
-		splines=line; 
-		subgraph cluster_0 { 
-			label="Subgraph A"; 
-			a; b; c
-		} 
- 
-		subgraph cluster_1 { 
-			label="Subgraph B"; 
-			d; e;
-		}
+{% extends "base.html" %}
+{% block content %}
+    <h2>Examples</h2>
+    <p>GraphViz uses the <code class="inline">DOT</code> language to describe graphs, Below are examples
+        of the language, with their resulting outputs.</p>
+    <ul>
+        <li><a href="#example-1">Simple Graph</a></li>
+        <li><a href="#example-2">K6</a></li>
+        <li><a href="#example-3">Simple Digraph</a></li>
+        <li><a href="#example-4">Full Digraph</a></li>
+        <li><a href="#example-5">Showing A Path</a></li>
+        <li><a href="#example-6">Subgraphs</a></li>
+        <li><a href="#example-7">Large Graphs</a></li>
+    </ul>
 
-		a -- e; 
-		a -- d; 
-		b -- d; 
-		b -- e; 
-		c -- d; 
-		c -- e; 
-	}	
-	</code>
-	<img src="/resources/static/images/example6a.png" class="dot-example"/>
-	</div>
-	</p>
-	
-	<p>
-	<a name="example-7" />
-	<h3>Example 7: Large Graphs</h3>
-	To make it easier to input large graph descriptions, One may group edges together with a set of braces, It may
-	also help to lay the graph out left to right instead of top to bottom.
-	<div class="dot-example-container">
-	<code>	graph {
-		rankdir=LR; // Left to Right, instead of Top to Bottom
-		a -- { b c d };
-		b -- { c e };
-		c -- { e f };
-		d -- { f g };
-		e -- h;
-		f -- { h i j g };
-		g -- k;
-		h -- { o l };
-		i -- { l m j };
-		j -- { m n k };
-		k -- { n r };
-		l -- { o m };
-		m -- { o p n };
-		n -- { q r };
-		o -- { s p };
-		p -- { s t q };
-		q -- { t r };
-		r -- t;
-		s -- z; 
-		t -- z;
-	}
-	</code>
-	<img src="/resources/static/images/example7.png" class="dot-example"/><br />
-	Another feature that can make large graphs manageable is to group nodes together at the same rank,
-	the graph above for example is copied from a specific assignment, but doesn't look the same because of how the
-	nodes are shifted around to fit in a more space optimal, but less visually simple way.
-	We can make it look much more similar by grouping the nodes together for display as is done in the assignment
-	with rank, as follows	
-	<code>	graph { 
-		rankdir=LR;
-		a -- { b c d }; b -- { c e }; c -- { e f }; d -- { f g }; e -- h; 
-		f -- { h i j g }; g -- k; h -- { o l }; i -- { l m j }; j -- { m n k }; 
-		k -- { n r }; l -- { o m }; m -- { o p n }; n -- { q r }; 
-		o -- { s p }; p -- { s t q }; q -- { t r }; r -- t; s -- z; t -- z; 
-		{ rank=same, b, c, d }
-		{ rank=same, e, f, g }
-		{ rank=same, h, i, j, k }
-		{ rank=same, l, m, n }
-		{ rank=same, o, p, q, r }
-		{ rank=same, s, t }
-	}
-	</code>
-	<img src="/resources/static/images/example7a.png" class="dot-example"/>
-	</div>
-	</p>
-  {% endblock %}
+    <div class="container">
+        <a name="example-1"/>
+        <h3>Example 1: Simple Graph</h3>
+        <div class="row">
+            <div class="col-xsm p-4 ">
+                <pre>
+                    <code>
+graph {
+    a -- b;
+    b -- c;
+    a -- c;
+    d -- c;
+    e -- c;
+    e -- a;
+}
+                    </code>
+                </pre>
+            </div>
+            <div class="col-sm">
+                <img src="/resources/static/images/example1.png" class="dot-example img-fluid"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <a name="example-2"/>
+        <h3>Example 2: K6</h3>
+        <div class="row">
+            <div class="col-xsm p-4 ">
+        <pre>
+            <code>
+graph {
+    a -- b;
+    b -- c;
+    c -- d;
+    d -- e;
+    e -- f;
+    a -- f;
+    a -- c;
+    a -- d;
+    a -- e;
+    b -- d;
+    b -- e;
+    b -- f;
+    c -- e;
+    c -- f;
+    d -- f;
+}
+            </code>
+        </pre>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <img src="/resources/static/images/example2.png" class="dot-example img-fluid"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <a name="example-3"/>
+        <h3>Example 3: Simple Digraph</h3>
+        <div class="row">
+            <div class="col-xsm p-4 ">
+    <pre>
+    <code>
+digraph {
+    a -> b;
+    b -> c;
+    c -> d;
+    d -> a;
+}
+        </code>
+        </pre>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <img src="/resources/static/images/example3.png" class="dot-example img-fluid"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <a name="example-4"/>
+        <h3>Example 4: Full Digraph</h3>
+
+        <div class="row">
+            <div class="col-xsm p-4 ">
+    <pre>
+    <code>
+digraph {
+    a -> b[label="0.2",weight="0.2"];
+    a -> c[label="0.4",weight="0.4"];
+    c -> b[label="0.6",weight="0.6"];
+    c -> e[label="0.6",weight="0.6"];
+    e -> e[label="0.1",weight="0.1"];
+    e -> b[label="0.7",weight="0.7"];
+}
+        </code>
+        </pre>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <img src="/resources/static/images/example4.png" class="dot-example img-fluid"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <a name="example-5"/>
+        <h3>Example 5: Showing A Path</h3>
+        <div class="row">
+            <div class="col-xsm p-4 ">
+    <pre>
+    <code>
+graph {
+    a -- b[color=red,penwidth=3.0];
+    b -- c;
+    c -- d[color=red,penwidth=3.0];
+    d -- e;
+    e -- f;
+    a -- d;
+    b -- d[color=red,penwidth=3.0];
+    c -- f[color=red,penwidth=3.0];
+}
+    </code>
+        </pre>
+                Note that there's also a shorthand method as follows:
+                <pre>
+                    <code>
+graph {
+    a -- b -- d -- c -- f[color=red,penwidth=3.0];
+    b -- c;
+    d -- e;
+    e -- f;
+    a -- d;
+}
+                    </code>
+                </pre>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <img src="/resources/static/images/example5.png" class="dot-example img-fluid"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <a name="example-6"/>
+        <h3>Example 6: Subgraphs</h3>
+        Please note there are some quirks here, First the name of the subgraphs are important, to be visually
+        separated they must be prefixed with <code class="inline">cluster_</code> as shown below, and second only the
+        DOT and FDP
+        layout methods seem to support subgraphs (See the graph generation page for more information on the layout
+        methods)
+        <div class="row">
+            <div class="col-sm">
+                        <pre>
+                            <code>
+digraph {
+    subgraph cluster_0 {
+        label="Subgraph A";
+        a -> b;
+        b -> c;
+        c -> d;
+    }
+
+    subgraph cluster_1 {
+        label="Subgraph B";
+        a -> f;
+        f -> c;
+    }
+}
+                            </code>
+                        </pre>
+            </div>
+            <div class="col-sm">
+                <img src="/resources/static/images/example6.png" class="dot-example img-fluid"/>
+            </div>
+        </div>
+        Another Example of a Subgraph, In this example I group nodes together seperately from their edges, And
+        also uses the graph attribute <code class="inline">splines=line;</code> to specify that edges should be drawn
+        only as straight lines, no curves allowed.
+        <div class="row">
+            <div class="col-sm">
+                <code>
+                            <pre>
+graph {
+    splines=line;
+    subgraph cluster_0 {
+        label="Subgraph A";
+        a; b; c
+    }
+
+    subgraph cluster_1 {
+        label="Subgraph B";
+        d; e;
+    }
+
+    a -- e;
+    a -- d;
+    b -- d;
+    b -- e;
+    c -- d;
+    c -- e;
+}
+                            </pre>
+                </code>
+            </div>
+            <div class="col-sm">
+                <img src="/resources/static/images/example6a.png" class="dot-example img-fluid"/>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <a name="example-7"/>
+        <h3>Example 7: Large Graphs</h3>
+        To make it easier to input large graph descriptions, One may group edges together with a set of braces, It may
+        also help to lay the graph out left to right instead of top to bottom.
+        <div class="row">
+            <div class="col-xsm p-4 ">
+    <pre>
+    <code>
+graph {
+    rankdir=LR; // Left to Right, instead of Top to Bottom
+    a -- { b c d };
+    b -- { c e };
+    c -- { e f };
+    d -- { f g };
+    e -- h;
+    f -- { h i j g };
+    g -- k;
+    h -- { o l };
+    i -- { l m j };
+    j -- { m n k };
+    k -- { n r };
+    l -- { o m };
+    m -- { o p n };
+    n -- { q r };
+    o -- { s p };
+    p -- { s t q };
+    q -- { t r };
+    r -- t;
+    s -- z;
+    t -- z;
+}
+    </code>
+        </pre>
+            </div>
+            <div class="col-l">
+                <img src="/resources/static/images/example7.png" class="dot-example img-fluid"/><br/>
+            </div>
+        </div>
+        Another feature that can make large graphs manageable is to group nodes together at the same rank,
+        the graph above for example is copied from a specific assignment, but doesn't look the same because of how the
+        nodes are shifted around to fit in a more space optimal, but less visually simple way.
+        We can make it look much more similar by grouping the nodes together for display as is done in the assignment
+        with rank, as follows
+        <div class="row">
+            <div class="col-sm">
+                <code>
+            <pre>
+graph {
+    rankdir=LR;
+    a -- { b c d }; b -- { c e }; c -- { e f }; d -- { f g }; e -- h;
+    f -- { h i j g }; g -- k; h -- { o l }; i -- { l m j }; j -- { m n k };
+    k -- { n r }; l -- { o m }; m -- { o p n }; n -- { q r };
+    o -- { s p }; p -- { s t q }; q -- { t r }; r -- t; s -- z; t -- z;
+    { rank=same; b, c, d }
+    { rank=same; e, f, g }
+    { rank=same; h, i, j, k }
+    { rank=same; l, m, n }
+    { rank=same; o, p, q, r }
+    { rank=same; s, t }
+}
+            </pre>
+                </code>
+            </div>
+            <div class="col-l">
+                <img src="/resources/static/images/example7a.png" class="dot-example img-fluid"/>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

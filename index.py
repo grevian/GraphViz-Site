@@ -1,4 +1,3 @@
-import logging
 import os
 import webapp2
 import jinja2
@@ -12,9 +11,8 @@ jinja_environment = jinja2.Environment(
 def get_navigation_links(current):
   navs = [
     {'title': 'Home', 'url': '/', 'classes': ''},
-    {'title': 'Documentation', 'url': '/documentation', 'classes': ''},
-    #{'title': 'Examples', 'url': '/example', 'classes': ''},
-    #{'title': 'Reference', 'url': '/reference', 'classes': ''},
+    {'title': 'Examples', 'url': '/example', 'classes': ''},
+    {'title': 'Reference', 'url': '/reference', 'classes': ''},
     {'title': 'Make a Graph', 'url': '/graph', 'classes': ''},
     {'title': 'About this Site', 'url': '/about', 'classes': ''},
     {'title': 'Related Links', 'url': '/links', 'classes': ''},
@@ -23,11 +21,9 @@ def get_navigation_links(current):
 
   for n in navs:
     if current == 'index' and n['title'] == 'Home':
-      n['classes'] = 'current'
-    if current in ['reference','example'] and n['title'] == 'Documentation':
-      n['classes'] = 'current'
+      n['classes'] = 'active'
     if current in n['url']:
-      n['classes'] = 'current'
+      n['classes'] = 'active'
 
   return navs
 
@@ -46,7 +42,6 @@ APP = webapp2.WSGIApplication([
     webapp2.Route(r'/about', StaticPageHandler, name='about', defaults={'name': 'about'}),
     webapp2.Route(r'/contact', StaticPageHandler, name='contact', defaults={'name': 'contact'}),
     webapp2.Route(r'/links', StaticPageHandler, name='links', defaults={'name': 'links'}),
-    webapp2.Route(r'/documentation', StaticPageHandler, name='documentation', defaults={'name': 'documentation'}),
     webapp2.Route(r'/example', StaticPageHandler, name='example', defaults={'name': 'example'}),
     webapp2.Route(r'/example.html', StaticPageHandler, name='example_html', defaults={'name': 'example'}),
     webapp2.Route(r'/reference', StaticPageHandler, name='reference', defaults={'name': 'reference'}),

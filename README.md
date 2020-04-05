@@ -6,11 +6,9 @@ course at Algoma University, to help myself and others who needed to draw graphs
 for various problems including Euler and Hamiltonian Circuits and Paths, as 
 well as Dijkstra's Algorithm and other graph and tree applications. I wrote 
 a set of examples and a quick reference for the features I found myself using,
-and wrapped it all up in an [HTML-5 Boilerplate](http://html5boilerplate.com/) template 
+and wrapped it all up in an easily accessible website format for others to use 
 
 ## Setup
 
-You can register for an App Engine free account, and deploy this simply by cloning the
-repository, changing the application field in app.yaml, and deploying it using the appcfg.py
-tool included in the App Engine SDK
-
+You can register for [Google Cloud](https://cloud.google.com/gcp/) account, install the [gcloud SDK tools](https://cloud.google.com/sdk/docs/quickstarts), clone this
+repository, then deploy using `gcloud app deploy .`

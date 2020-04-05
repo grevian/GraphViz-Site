@@ -1,47 +1,50 @@
-   {% extends "base.html" %}
-   {% block content %}
+{% extends "base.html" %}
+{% block content %}
     <h2>Make A Graph</h2>
-        <p>Enter your <code class="inline">DOT</code> definition in the box below, and click Generate to display the resulting graph.</p>
-        <form method="POST" action="/graph" id="dot-submission" onsubmit="ga('send', 'event', 'Graph', 'create');return true;">
-         <textarea spellcheck="false" wrap="off" id="dot" name="dot">{{ dot|e }}</textarea>
-         <br />
-         <label for="method">Layout Method</label>
-         <select id="method" name="method">
-          <option value="dot" {% if method == 'dot' %}selected{% endif %}>dot</option>
-          <option value="neato" {% if method == 'neato' %}selected{% endif %}>neato</option>
-          <option value="twopi" {% if method == 'twopi' %}selected{% endif %}>twopi</option>
-          <option value="circo" {% if method == 'circo' %}selected{% endif %}>circo</option>
-          <option value="fdp" {% if method == 'fdp' %}selected{% endif %}>fdp</option>
-         </select> (Just use trial and error to find the method you think works best)
-         <br />
-         <input type="submit" value="Generate" />
-        </form>
-        {% if graph_id %}
+    <p>Enter your <code class="inline">DOT</code> definition in the box below, and click Generate to display the resulting graph.</p>
+    <form method="POST" action="/graph" id="dot-submission" onsubmit="ga('send', 'event', 'Graph', 'create');return true;">
+        <div class="form-group">
+        <textarea spellcheck="false" wrap="off" id="dot" name="dot" class="form-control" rows="6">{{ dot|e }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="method">Layout Method</label>
+            <select id="method" name="method">
+                <option value="dot" {% if method == 'dot' %}selected{% endif %}>dot</option>
+                <option value="neato" {% if method == 'neato' %}selected{% endif %}>neato</option>
+                <option value="twopi" {% if method == 'twopi' %}selected{% endif %}>twopi</option>
+                <option value="circo" {% if method == 'circo' %}selected{% endif %}>circo</option>
+                <option value="fdp" {% if method == 'fdp' %}selected{% endif %}>fdp</option>
+            </select> (Just use trial and error to find the method you think works best)
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Generate" />
+        </div>
+    </form>
+    {% if graph_id %}
         <h2>Results</h2>
-        <div id="results">        
+        <div id="results">
         {% if building %}
-          <img id="graph-image" src="/resources/static/images/loader.gif" />
+            <img id="graph-image" src="/resources/static/images/loader.gif" />
         {% else %}
-          <img id="graph-image" src="/graph/images/{{ graph_id }}" />
+            <img id="graph-image" src="/graph/images/{{ graph_id }}" />
         {% endif %}
         <p class="error" id="error-container">
-           <em>Error:</em>
-           <span id="error-message">
-            {{ error|e }}
-           </span>
+            <em>Error:</em>
+            <span id="error-message">
+                {{ error|e }}
+            </span>
         </p>
-        {% endif %}
-   {% endblock %}
+        </div>
+    {% endif %}
+{% endblock %}
 
 {% if building %}
-  {% block javascript %}
-           <script>
-           var graph_id = '{{ graph_id }}';
-           if (graph_id != '') { 
-            pollImage(graph_id);
-           }
-          </script>
-  {% endblock %}
+    {% block javascript %}
+        <script>
+            var graph_id = '{{ graph_id }}';
+            if (graph_id != '') {
+                pollImage(graph_id);
+            }
+            </script>
+    {% endblock %}
 {% endif %}
-   
- 
