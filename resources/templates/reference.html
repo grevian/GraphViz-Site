@@ -1,96 +1,114 @@
-   {% extends "base.html" %}
-   {% block content %}
-   <h2>Reference</h2>
-    <h3>General Information, and Links to more detailed References</h3>
-    <p>
-     Graphs and Vertices (Called Nodes in the GraphViz notation) may have a large number of attributes
-     that affect both the graph's actual layout, and details like colours, labels, line types, etc.
-     I cover a few of the attributes below but for a full reference see <a href="http://graphviz.org/doc/info/attrs.html">The
-     GraphViz Attribute Index</a>, It's a bit tricky to read at first but really not too complicated, and it's very comprehensive.
-    </p>
-    <p><h3>Important Attributes</h3>
-    I have found the following attributes to be particularily useful in my classes
-     <h4>Graph Attributes</h4>
-     <ul>
-      <li><code class="inline">label="My Graph";</code>Label a graph itself</li>
-      <li><code class="inline">rankdir=LR;</code>Lay the graph out from Left to Right, instead of Top to Bottom</li>
-      <li><code class="inline">{rank=same; a, b, c }</code>Group nodes together at the same level of a graph</li>
-      <li><code class="inline">splines="line";</code>Force edges to be straight, no curves or angles</li>
-      <li><code class="inline">K=0.6;</code>Used to influence the 'spring' used in the layout, Can be used to push nodes further apart, 
-      which is especially useful for twopi and sfdp layouts</li>
-     </ul>
-     <h4>Vertex Attributes</h4>
-     <ul>
-      <li><code class="inline">[label="Some Label"]</code>Labels the Vertex</li>
-      <li><code class="inline">[color="red"]</code>Colors the Vertex</li>
-      <li><code class="inline">[fillcolor="blue"]</code>Fills the Vertex with the specified colour</li>
-     </ul>
-     <h4>Edge Attributes</h4>
-     <ul>
-      <li><code class="inline">[label="Some Label"]</code>Labels the Edge (Useful for Weights)</li>
-      <li><code class="inline">[color="red"]</code>Colors the Vertex (Useful for Paths)</li>
-      <li><code class="inline">[penwidth=2.0]</code>Adjusts the thickness of the edge line, Very useful for Paths</li>
-     </ul>
-     <br />
-     Edges may also have a <code class="inline">weight</code> attribute, defined as <code class="inline">[weight=0.5]</code> for example,
-     but note that this doesn't display the weight directly, It instead acts as a hint to the graph layout to give this edge a more
-     direct routing.
-    </p>
-    
-    <p><h3>Graphs</h3>
-    Graphs are defined as either a <code class="inline">graph</code> or a <code class="inline">digraph</code> using
-    fairly standard syntax, similar to an edge list.<br /><br />
-    <code>	graph { 
-		node1 -- node2;
-		node3 -- node2;    
-	}
-    </code><br />
-<code>	digraph { 
-		node1 -> node2;
-		node3 -> node2;    
-	}
-    </code><br />
-    </p>
-    <p><h3>Vertices</h3>
-    Vertices are defined with a simple plaintext label, <code class="inline">A, B, C, Test, Vertice1, some_vertex</code>, etc. 
-    If you need a more complicated label you can declare the vertex first, before defining an edge, and give it a label attribute,
-    for example: <br />
-    <code>	digraph { 
-		someVertex[label="A Complicated Label"];
-		someVertex -> node2;
-		node2 -> node3;
-	}     
-    </code><br />
-    </p>
-    <p><h3>Edges</h3>
-    For the most part the only concern with edges is their colour/thickness, and Label, as the rest is handled
-    automatically by the graph/digraph definition, To color an edge apply the <a href="http://graphviz.org/doc/info/colors.html">color attribute</a> to the graph
-    definition as follows<br />
-    <code>	digraph { 
-		node1 -> node2[color="red"];
-	}
-    </code><br/>
-    To Display a weight, we give the vertex itself a label, similar to how we label nodes
-    <br />
-<code>	digraph { 
-		node1 -> node2[label="0.2"];
-		node2 -> node3[label="0.2"];
-	}
-</code>
-    <br />
-    We can actually apply any label we like to edge in this way
-    <code>	digraph {
-		node1 -> node2[label="edge1"];
-		node2 -> node3[label="edge2"];    
-	}
-    </code>
-    <br />
-    You may combine these attributes in any way you please<br />
-    <code>	digraph {
-		node1[label="Some Complicated Label"];
-		node1 -> node2[label="An Edge",color=red];
-		node2 -> node3;
-	}
-    </code>
-    </p>
-    {% endblock %}
+{% extends "base.html" %}
+{% block content %}
+    <div class="container mb-4">
+        <h2>Reference</h2>
+        <p>
+            Graphs and Vertices (Called Nodes in the GraphViz notation) may have a large number of attributes
+            that affect both the graph's actual layout, and details like colours, labels, and line types.
+            I cover a few of the attributes below but for a full reference see the <a
+                href="http://graphviz.org/doc/info/attrs.html">
+            GraphViz Attribute Index</a>
+        </p>
+        <div class="container">
+            <h3>Attributes</h3>
+            <h4>Graph Attributes</h4>
+            <ul>
+                <li><code class="inline">label="My Graph";</code>Label a graph itself</li>
+                <li><code class="inline">rankdir=LR;</code>Lay the graph out from Left to Right, instead of Top to
+                    Bottom
+                </li>
+                <li><code class="inline">{rank=same; a, b, c }</code>Group nodes together at the same level of a graph
+                </li>
+                <li><code class="inline">splines="line";</code>Force edges to be straight, no curves or angles</li>
+                <li><code class="inline">K=0.6;</code>Used to influence the 'spring' used in the layout, Can be used to
+                    push
+                    nodes further apart,
+                    which is especially useful for twopi and sfdp layouts
+                </li>
+            </ul>
+            <h4>Vertex Attributes</h4>
+            <ul>
+                <li><code class="inline">[label="Some Label"]</code>Labels the Vertex</li>
+                <li><code class="inline">[color="red"]</code>Colors the Vertex</li>
+                <li><code class="inline">[fillcolor="blue"]</code>Fills the Vertex with the specified colour</li>
+            </ul>
+            <h4>Edge Attributes</h4>
+            <ul>
+                <li><code class="inline">[label="Some Label"]</code>Labels the Edge (Useful for Weights)</li>
+                <li><code class="inline">[color="red"]</code>Colors the Vertex (Useful for Paths)</li>
+                <li><code class="inline">[penwidth=2.0]</code>Adjusts the thickness of the edge line, Very useful for
+                    Paths
+                </li>
+            </ul>
+            Edges may also have a <code class="inline">weight</code> attribute, defined as
+            <code class="inline">[weight=0.5]</code> for example,
+            but note that this doesn't display the weight directly, It instead acts as a hint to the graph layout to
+            give this
+            edge a more
+            direct routing.
+        </div>
+        <div class="container">
+            <h3>Graphs</h3>
+            Graphs are defined as either a <code class="inline">graph</code> or a <code class="inline">digraph</code>
+            using
+            fairly standard syntax, similar to an edge list.<br/><br/>
+            <code> graph {
+                node1 -- node2;
+                node3 -- node2;
+                }
+            </code><br/>
+            <code> digraph {
+                node1 -> node2;
+                node3 -> node2;
+                }
+            </code>
+        </div>
+        <div class="container">
+            <h3>Vertices</h3>
+            Vertices are defined with a simple plaintext label, <code class="inline">A, B, C, Test, Vertice1,
+            some_vertex</code>
+            , etc.
+            If you need a more complicated label you can declare the vertex first, before defining an edge, and give it
+            a label
+            attribute,
+            for example: <br/>
+            <code> digraph {
+                someVertex[label="A Complicated Label"];
+                someVertex -> node2;
+                node2 -> node3;
+                }
+            </code><br/>
+            <h3>Edges</h3>
+            For the most part the only concern with edges is their colour/thickness, and Label, as the rest is handled
+            automatically by the graph/digraph definition, To color an edge apply the
+            <a href="http://graphviz.org/doc/info/colors.html">color attribute</a> to the graph
+            definition as follows<br/>
+            <code> digraph {
+                node1 -> node2[color="red"];
+                }
+            </code><br/>
+            To Display a weight, we give the vertex itself a label, similar to how we label nodes
+            <br/>
+            <code> digraph {
+                node1 -> node2[label="0.2"];
+                node2 -> node3[label="0.2"];
+                }
+            </code>
+            <br/>
+            We can actually apply any label we like to edge in this way
+            <code> digraph {
+                node1 -> node2[label="edge1"];
+                node2 -> node3[label="edge2"];
+                }
+            </code>
+            <br/>
+            You may combine these attributes in any way you please<br/>
+            <code> digraph {
+                node1[label="Some Complicated Label"];
+                node1 -> node2[label="An Edge",color=red];
+                node2 -> node3;
+                }
+            </code>
+        </div>
+    </div>
+{% endblock %}
