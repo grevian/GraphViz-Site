@@ -1,0 +1,7 @@
+google-cloud-tasks
+google-cloud-datastore
+google-cloud-storage
+googleapis_common_protos
+requests
+jinja2
+flask
