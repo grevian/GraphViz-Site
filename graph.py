@@ -17,7 +17,8 @@ jinja_environment = jinja2.Environment(
 class UserGraph(ndb.Model):
   dot = ndb.TextProperty(indexed=False,required=True)
   image = ndb.BlobKeyProperty(indexed=False, required=False)
-  graph_type = ndb.StringProperty(indexed=False, required=True, choices=['dot', 'neato', 'twopi', 'circo', 'fdp'])
+  graph_type = ndb.StringProperty(indexed=False, required=True, choices=['dot', 'neato', 'twopi', 'circo', 'fdp',
+                                                                         'osage', 'patchwork'])
   created = ndb.DateTimeProperty(auto_now_add=True)
   building = ndb.BooleanProperty(indexed=True, required=True)
   error = ndb.TextProperty(indexed=False, required=False)
@@ -37,9 +38,7 @@ def build_graph(graph_id):
   result = requests.post(url, params=data)
   
   if result.status_code != 200:
-    # g.error = result.text
-    # I really wish Google would provide more meaningful feedback when this fails
-    g.error = 'Failed to generate your graph (Error [%s]), perhaps a syntax error?' % result.status_code
+    g.error = 'Failed to generate your graph (Error [%s]): %s' % (result.status_code, result.text)
     g.building = False
     g.put()
   else:
