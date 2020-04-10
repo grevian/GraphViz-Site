@@ -1,9 +1,4 @@
-runtime: python27
-api_version: 1
-threadsafe: true
-
-builtins:
-- deferred: on
+runtime: python38
 
 handlers:
 - url: /favicon\.ico
@@ -26,11 +21,6 @@ handlers:
   static_dir: resources/static
 
 - url: /.*
-  script: index.APP
-
-libraries:
-- name: webapp2
-  version: "2.5.2"
-- name: jinja2
-  version: "2.6"
-
+  script: auto
+  secure: always
+  redirect_http_response_code: 301

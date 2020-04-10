@@ -4,3 +4,4 @@ tmp/*
 *.swp
 */*.pyc
 *.pyc
+creds.json

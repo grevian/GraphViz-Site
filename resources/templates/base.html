@@ -29,9 +29,27 @@
         </button>
         <div class="collapse navbar-collapse" id="main-navbar">
             <ul class="navbar-nav mr-auto">
-                {% for navs in main_nav %}
-                    <li class="nav-item"><a class="nav-link" href="{{ navs.url }}" class="{{ navs.classes }}">{{ navs.title }}</a></li>
-                {% endfor %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/example">Examples</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/reference">Reference</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/graph">Make a Graph</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About this Site</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/links">Related Links</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact Me</a>
+                </li>
             </ul>
         </div>
     </nav>
